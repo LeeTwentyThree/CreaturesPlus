@@ -11,7 +11,7 @@ namespace MoreCreatures
     {
         public override float Evaluate(Creature creature)
         {
-            if(creature.transform.position.y > Ocean.main.GetOceanLevel() - 90f || (creature.transform.position.y < Ocean.main.GetOceanLevel() - 150f && creature.transform.position.y > Ocean.main.GetOceanLevel() - 350f))
+            if(creature.transform.position.y > Ocean.main.GetOceanLevel() - 90f && creature.transform.position.y < Ocean.main.GetOceanLevel() - 150f && creature.transform.position.y > Ocean.main.GetOceanLevel() - 350f)
             {
                 return 0.75f;
             }

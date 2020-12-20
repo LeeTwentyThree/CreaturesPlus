@@ -47,7 +47,7 @@ namespace MoreCreatures
 
         public override RoarAbilityData RoarAbilitySettings => new RoarAbilityData(true, 60f, 800f, "GargantuanRoar", "roar", true, 50f, 0f);
 
-        public override float TurnSpeed => 0.2f;
+        public override float TurnSpeed => 0.1f;
 
         public override SwimRandomData SwimRandomSettings => new SwimRandomData(true, new Vector3(60f, 0f, 60f), 10f, 3f, 0.5f);
 
