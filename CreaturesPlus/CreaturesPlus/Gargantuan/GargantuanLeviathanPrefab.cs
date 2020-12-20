@@ -49,7 +49,7 @@ namespace MoreCreatures
 
         public override float TurnSpeed => 0.1f;
 
-        public override SwimRandomData SwimRandomSettings => new SwimRandomData(true, new Vector3(60f, 0f, 60f), 10f, 3f, 0.5f);
+        public override SwimRandomData SwimRandomSettings => new SwimRandomData(true, new Vector3(60f, 20f, 60f), 10f, 3f, 0.5f);
 
         public override SmallVehicleAggressivenessSettings AggressivenessToSmallVehicles => new SmallVehicleAggressivenessSettings(1f, 75f);
 
@@ -103,7 +103,7 @@ namespace MoreCreatures
                 prefab.SearchChild("Eye6").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
 
                 GameObject mouth = prefab.SearchChild("Mouth");
-                AddMeleeAttack(mouth, 1f, 150f, "GargantuanBite", 800f, false, components);
+                AddMeleeAttack(mouth, 1f, 150f, "GargantuanBite", 5001f, false, components);
 
                 #region CreatureActions
 
@@ -115,10 +115,10 @@ namespace MoreCreatures
                 creatureActions.Add(actionAtkCyclops);
 
 
-                MakeAggressiveTo(40f, 4, EcoTargetType.Shark, 0f, 4f);
-                MakeAggressiveTo(125f, 4, EcoTargetType.Leviathan, 0f, 1f);
-                MakeAggressiveTo(50f, 4, EcoTargetType.SubDecoy, 0f, 1f);
-                MakeAggressiveTo(50f, 4, EcoTargetType.Whale, 0.1f, 1f);
+                MakeAggressiveTo(40f, 5, EcoTargetType.Shark, 0f, 2f);
+                MakeAggressiveTo(125f, 5, EcoTargetType.Leviathan, 0f, 3f);
+                MakeAggressiveTo(50f, 5, EcoTargetType.SubDecoy, 0f, 2f);
+                MakeAggressiveTo(100f, 5, EcoTargetType.Whale, 0f, 1f);
 
                 DiveAction actionDive = prefab.AddComponent<DiveAction>();
                 creatureActions.Add(actionDive);

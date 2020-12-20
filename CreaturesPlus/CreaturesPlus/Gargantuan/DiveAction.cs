@@ -11,7 +11,7 @@ namespace MoreCreatures
     {
         public override float Evaluate(Creature creature)
         {
-            if(creature.transform.position.y > Ocean.main.GetOceanLevel() - 90f && creature.transform.position.y < Ocean.main.GetOceanLevel() - 150f && creature.transform.position.y > Ocean.main.GetOceanLevel() - 350f)
+            if((creature.transform.position.y > Ocean.main.GetOceanLevel() - 90f || creature.transform.position.y < Ocean.main.GetOceanLevel() - 275f) && creature.transform.position.y > Ocean.main.GetOceanLevel() - 400f)
             {
                 return 0.75f;
             }
@@ -20,7 +20,7 @@ namespace MoreCreatures
 
         public override void StartPerform(Creature creature)
         {
-            swimBehaviour.SwimTo(new Vector3(transform.position.x, -100f, transform.position.z), 25f);
+            swimBehaviour.SwimTo(new Vector3(transform.position.x, -175f, transform.position.z), 25f);
         }
     }
 }
