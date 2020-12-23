@@ -75,59 +75,47 @@ namespace MoreCreatures
             }
         };
 
-        public override GameObject GetGameObject()
+        public override void AddCustomBehaviour(CreatureComponents components)
         {
-            if (prefab == null)
-            {
-                SetupPrefab(out CreatureComponents<GargantuanLeviathan> components);
+            DealDamageOnImpact dealDamageOnImpact = prefab.AddComponent<DealDamageOnImpact>();
+            dealDamageOnImpact.speedMinimumForDamage = 3f;
+            dealDamageOnImpact.mirroredSelfDamage = false;
 
-                DealDamageOnImpact dealDamageOnImpact = prefab.AddComponent<DealDamageOnImpact>();
-                dealDamageOnImpact.speedMinimumForDamage = 3f;
-                dealDamageOnImpact.mirroredSelfDamage = false;
+            CreateTrail(prefab.SearchChild("spine"), components, 4f, -1f);
+            const float tentacleTrailSnapSpeed = 7f;
+            const float tentacleTrailMaxSegmentOffset = 15f;
+            CreateTrail(prefab.SearchChild("tentaclelowerl"), components, tentacleTrailSnapSpeed, tentacleTrailMaxSegmentOffset);
+            CreateTrail(prefab.SearchChild("tentaclelowerr"), components, tentacleTrailSnapSpeed, tentacleTrailMaxSegmentOffset);
+            CreateTrail(prefab.SearchChild("tentacleupperl"), components, tentacleTrailSnapSpeed, tentacleTrailMaxSegmentOffset);
+            CreateTrail(prefab.SearchChild("tentacleupperr"), components, tentacleTrailSnapSpeed, tentacleTrailMaxSegmentOffset);
+            CreateTrail(prefab.SearchChild("ChinTendrilL"), components, 7f, 3f, 1f);
+            CreateTrail(prefab.SearchChild("ChinTendrilR"), components, 7f, 3f, 1f);
 
-                CreateTrail(prefab.SearchChild("spine"), components, 4f, -1f);
-                const float tentacleTrailSnapSpeed = 7f;
-                const float tentacleTrailMaxSegmentOffset = 15f;
-                CreateTrail(prefab.SearchChild("tentaclelowerl"), components, tentacleTrailSnapSpeed, tentacleTrailMaxSegmentOffset);
-                CreateTrail(prefab.SearchChild("tentaclelowerr"), components, tentacleTrailSnapSpeed, tentacleTrailMaxSegmentOffset);
-                CreateTrail(prefab.SearchChild("tentacleupperl"), components, tentacleTrailSnapSpeed, tentacleTrailMaxSegmentOffset);
-                CreateTrail(prefab.SearchChild("tentacleupperr"), components, tentacleTrailSnapSpeed, tentacleTrailMaxSegmentOffset);
-                CreateTrail(prefab.SearchChild("ChinTendrilL"), components, 7f, 3f, 1f);
-                CreateTrail(prefab.SearchChild("ChinTendrilR"), components, 7f, 3f, 1f);
+            prefab.SearchChild("Eye1").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
+            prefab.SearchChild("Eye2").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
+            prefab.SearchChild("Eye3").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
+            prefab.SearchChild("Eye4").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
+            prefab.SearchChild("Eye5").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
+            prefab.SearchChild("Eye6").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
 
-                prefab.SearchChild("Eye1").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
-                prefab.SearchChild("Eye2").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
-                prefab.SearchChild("Eye3").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
-                prefab.SearchChild("Eye4").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
-                prefab.SearchChild("Eye5").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
-                prefab.SearchChild("Eye6").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
+            GameObject mouth = prefab.SearchChild("Mouth");
+            AddMeleeAttack(mouth, 1f, 150f, "GargantuanBite", 5001f, false, components);
 
-                GameObject mouth = prefab.SearchChild("Mouth");
-                AddMeleeAttack(mouth, 1f, 150f, "GargantuanBite", 5001f, false, components);
-
-                #region CreatureActions
-
-                AttackCyclops actionAtkCyclops = prefab.AddComponent<AttackCyclops>();
-                actionAtkCyclops.swimVelocity = 25f;
-                actionAtkCyclops.aggressiveToNoise = new CreatureTrait(0f, 0.1f);
-                actionAtkCyclops.evaluatePriority = 0.9f;
-                actionAtkCyclops.priorityMultiplier = ECCHelpers.Curve_Flat();
-                creatureActions.Add(actionAtkCyclops);
+            AttackCyclops actionAtkCyclops = prefab.AddComponent<AttackCyclops>();
+            actionAtkCyclops.swimVelocity = 25f;
+            actionAtkCyclops.aggressiveToNoise = new CreatureTrait(0f, 0.1f);
+            actionAtkCyclops.evaluatePriority = 0.9f;
+            actionAtkCyclops.priorityMultiplier = ECCHelpers.Curve_Flat();
 
 
-                MakeAggressiveTo(40f, 5, EcoTargetType.Shark, 0f, 2f);
-                MakeAggressiveTo(125f, 5, EcoTargetType.Leviathan, 0f, 3f);
-                MakeAggressiveTo(50f, 5, EcoTargetType.SubDecoy, 0f, 2f);
-                MakeAggressiveTo(100f, 5, EcoTargetType.Whale, 0f, 1f);
+            MakeAggressiveTo(40f, 5, EcoTargetType.Shark, 0f, 2f);
+            MakeAggressiveTo(125f, 5, EcoTargetType.Leviathan, 0f, 3f);
+            MakeAggressiveTo(50f, 5, EcoTargetType.SubDecoy, 0f, 2f);
+            MakeAggressiveTo(100f, 5, EcoTargetType.Whale, 0f, 1f);
 
-                DiveAction actionDive = prefab.AddComponent<DiveAction>();
-                creatureActions.Add(actionDive);
+            DiveAction actionDive = prefab.AddComponent<DiveAction>();
 
-                #endregion
-
-                CompletePrefab(components);
-            }
-            return prefab;
+            prefab.AddComponent<GargantuanBehaviour>();
         }
     }
 }

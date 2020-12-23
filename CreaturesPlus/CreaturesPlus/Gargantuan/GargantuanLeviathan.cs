@@ -9,15 +9,14 @@ using ECCLibrary;
 
 namespace MoreCreatures
 {
-    public class GargantuanLeviathan : Creature
+    public class GargantuanBehaviour : MonoBehaviour
     {
         GameObject darkModel;
         GameObject glowingModel;
         LastTarget lastTarget;
 
-        public override void Start()
+        public void Start()
         {
-            base.Start();
             darkModel = gameObject.SearchChild("Model_Dark");
             glowingModel = gameObject.SearchChild("Model_Emissive");
             lastTarget = GetComponent<LastTarget>();
