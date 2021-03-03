@@ -49,7 +49,7 @@ namespace MoreCreatures
 
         public override float TurnSpeed => 0.1f;
 
-        public override SwimRandomData SwimRandomSettings => new SwimRandomData(true, new Vector3(60f, 20f, 60f), 10f, 3f, 0.5f);
+        public override SwimRandomData SwimRandomSettings => new SwimRandomData(true, new Vector3(120f, 20f, 120f), 10f, 3f, 0.5f);
 
         public override SmallVehicleAggressivenessSettings AggressivenessToSmallVehicles => new SmallVehicleAggressivenessSettings(1f, 75f);
 
@@ -64,16 +64,6 @@ namespace MoreCreatures
         public override string GetEncyTitle => "Gargantuan Leviathan";
 
         public override string GetEncyDesc => "Thought to be extinct, this leviathan-class specimen appears to have recently migrated to this location from another environment on this planet.\n\n1. Size:\nAt a length of nearly 900 meters, the Gargantuan Leviathan is the largest known living creature on Planet 4546B. Already seeming biologically impossible, this specimen appears to not be fully developed.\n\n2. Modular body:\nMany systems are working together to keep this creature alive. A repeating body structure implies this creature may actually be a series of organisms living in symbiosis, each capable of sustaining itself by passive means such as photosynthesis. If one segment dies, the creature still lives on. Each body segment contains many bioluminescent orbs that disorientate prey as the creature coils around its food.\n\n3. Tentacles:\nThese massive tentacles have been observed to help the creature suffocate large prey, including Reaper Leviathans, for easy consumption. They also play a role in impressing mates.\n\n4. Hunting:\nThis creature remains stealthy until it has found a target, and will go to any extent to put the target to put it into shock. It wields very powerful jaws, capable of rendering large creatures unconcious with one bite. The wide throat is capable of swallowing many large creatures whole.\n\nAssessment: Avoid at all costs.";
-
-        public override List<LootDistributionData.BiomeData> BiomesToSpawnIn => new List<LootDistributionData.BiomeData>()
-        {
-            new LootDistributionData.BiomeData()
-            {
-                biome = BiomeType.Dunes_OpenShallow_CreatureOnly,
-                count = 1,
-                probability = 0.001f
-            }
-        };
 
         public override void AddCustomBehaviour(CreatureComponents components)
         {
@@ -99,7 +89,7 @@ namespace MoreCreatures
             prefab.SearchChild("Eye6").AddComponent<TrackLastTarget>().lastTarget = components.lastTarget;
 
             GameObject mouth = prefab.SearchChild("Mouth");
-            AddMeleeAttack(mouth, 1f, 150f, "GargantuanBite", 5001f, false, components);
+            AddMeleeAttack(mouth, 1f, 150f, "BlazaBite", 5001f, false, components);
 
             AttackCyclops actionAtkCyclops = prefab.AddComponent<AttackCyclops>();
             actionAtkCyclops.swimVelocity = 25f;

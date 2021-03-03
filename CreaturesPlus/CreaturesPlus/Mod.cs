@@ -26,6 +26,11 @@ namespace CreaturesPlus
 
             gargantuan = new GargantuanLeviathanPrefab("GargantuanLeviathan", "Gargantuan Leviathan", "An ancient predator thought to be extinct", assetBundle.LoadAsset<GameObject>("GargantuanPrefab"), null);
             gargantuan.Patch();
+
+            StaticCreatureSpawns.RegisterStaticSpawn(new StaticSpawn(gargantuan, new Vector3(-1449, -200f, 715f), "OldGargDunes", 400f));
+            StaticCreatureSpawns.RegisterStaticSpawn(new StaticSpawn(gargantuan, new Vector3(1459, -200f, -789f), "OldGargBehindAurora", 400f));
+            StaticCreatureSpawns.RegisterStaticSpawn(new StaticSpawn(gargantuan, new Vector3(1130, -200f, 1760), "OldGargMountains", 400f));
+            StaticCreatureSpawns.RegisterStaticSpawn(new StaticSpawn(gargantuan, new Vector3(-834, -200f, -1670), "OldGargGrandReef", 400f));
         }
     }
 }
